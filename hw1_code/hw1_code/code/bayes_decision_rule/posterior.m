@@ -11,5 +11,6 @@ function p = posterior(x)
 l = likelihood(x);
 total = sum(sum(x));
 %TODO
-
+a=(l.*(sum(x,2)*ones(1,N)));
+p=a/total;
 end

@@ -18,19 +18,16 @@ axis([range(1) - 1, range(2) + 1, 0, 0.5]);
 [C,N]=size(train_x);
 %TODO
 %compute the number of all the misclassified x using maximum likelihood decision rule
-mis=0;
+
+mis_likelihood=0;
 for i=1:N
     sum1=sum(test_x(:,i),1);
-    prior=sum(train_x,2);
-    temp=ones(1,10);
-    prior=dot(prior,temp);
-    
     [max_a,index]=max(l(:,i));
-    mis=mis+sum1-test_x(index,i);
+    mis_likelihood=mis_likelihood+sum1-test_x(index,i);
 end
-mis_rate=mis/sum(sum(test_x));
-display(mis);
-display(mis_rate);
+mis_likelihood_rate=mis_likelihood/sum(sum(test_x));
+display(mis_likelihood);
+display(mis_likelihood_rate);
 %% Part2 posterior:
 p = posterior(train_x);
 
@@ -41,8 +38,24 @@ axis([range(1) - 1, range(2) + 1, 0, 1.2]);
 
 %TODO
 %compute the number of all the misclassified x using optimal bayes decision rule
-
+mis_posterior=0;
+for i=1:N
+    sum1=sum(test_x(:,i),1);
+    [max_a,index]=max(p(:,i));
+    mis_posterior=mis_posterior+sum1-test_x(index,i);
+end
+mis_posterior_rate=mis_posterior/sum(sum(test_x));
+display(mis_posterior);
+display(mis_posterior_rate);
 %% Part3 risk:
 risk = [0, 1; 2, 0];
 %TODO
 %get the minimal risk using optimal bayes decision rule and risk weights
+risk_weight=risk'*ones(C,N);
+risk_mat=risk_weight.*p;
+risk_loss=0;
+for i=1:N
+    [min_a,index]=min(risk_mat(:,i),[],1);
+    risk_loss=risk_loss+min_a*test_x(index,i);
+end
+display(risk_loss);

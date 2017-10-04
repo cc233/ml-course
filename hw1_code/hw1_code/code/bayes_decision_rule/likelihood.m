@@ -8,9 +8,6 @@ function l = likelihood(x)
 %
 
 [C, N] = size(x);
-l = zeros(C, N);
 %TODO
-for i=1:C
-    l(i,:)=x(i,:)/sum(x(i,:),2);
-end
+l=x./(sum(x,2)*ones(1,N));
 end
