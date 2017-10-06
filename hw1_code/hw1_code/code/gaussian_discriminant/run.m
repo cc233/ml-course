@@ -2,33 +2,33 @@
 % Sigma: 2x2 matrix
 % phi: a number
 
-mu0 = [0,0]';
-Sigma0 = [2,1;1,2];
-mu1 = [0,0]';
-Sigma1 = [2,1;1,2];
-phi = 0.5;
-plot_ex1(mu0, Sigma0, mu1, Sigma1, phi, 'Line', 1);
-% 
-% mu0 = _;
-% Sigma0 = _;
-% mu1 = _;
-% Sigma1 = _;
-% phi = _;
+% mu0 = [5,5]';
+% Sigma0 = [1,0;0,1];
+% mu1 = [0,0]';
+% Sigma1 = [1,0;0,1];
+% phi = 0.5;
+% plot_ex1(mu0, Sigma0, mu1, Sigma1, phi, 'Line', 1);
+
+% mu0 = [0.6,0.6]';
+% Sigma0 = [1,0;0,1];
+% mu1 = [0,0]';
+% Sigma1 = [1,0;0,1];
+% phi = 0.9;
 % plot_ex1(mu0, Sigma0, mu1, Sigma1, phi, 'Line (one side)', 2);
-% 
-% mu0 = _;
-% Sigma0 = _;
-% mu1 = _;
-% Sigma1 = _;
-% phi = _;
+
+% mu0 = [5,10]';
+% Sigma0 = [4,0;0,4];
+% mu1 = [5,0]';
+% Sigma1 = [1,0;0,1];
+% phi = 0.5;
 % plot_ex1(mu0, Sigma0, mu1, Sigma1, phi, 'Parabalic', 3);
-% 
-% mu0 = _;
-% Sigma0 = _;
-% mu1 = _;
-% Sigma1 = _;
-% phi = _;
-% plot_ex1(mu0, Sigma0, mu1, Sigma1, phi, 'Hyperbola', 4);
+
+mu0 = [5,10]';
+Sigma0 = [4,0;0,4];
+mu1 = [5,0]';
+Sigma1 = [1,0;0,1];
+phi = 0.5;
+plot_ex1(mu0, Sigma0, mu1, Sigma1, phi, 'Hyperbola', 4);
 % 
 % mu0 = _;
 % Sigma0 = _;
