@@ -12,5 +12,5 @@ l = likelihood(x);
 total = sum(sum(x));
 %TODO
 a=(l.*(sum(x,2)*ones(1,N)));
-p=a/total;
+p=a./(ones(C,1)*sum(a,1));
 end

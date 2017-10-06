@@ -27,7 +27,7 @@ xmax = max(max(x0), max(x1));
 ymin = min(min(y0), min(y1));
 ymax = max(max(y0), max(y1));
 
-step = 0.01; % TODO
+step = 0.05; % TODO
 [xs, ys] = meshgrid(xmin:step:xmax, ymin:step:ymax);
 
 xy = [xs(:) ys(:)];
