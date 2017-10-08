@@ -23,3 +23,22 @@ spam_test(:, 1:size(spam_test_tight, 2)) = spam_test_tight;
 
 %TODO
 %Implement a ham/spam email classifier, and calculate the accuracy of your classifier
+
+%a
+%find the words with the highest ratio
+top_k=10;
+
+ratio=x(2,:)./x(1,:);
+[top_k_ratio,top_k_idx]= sort(ratio,2);
+fprintf('top k words:\n');
+fprintf('idx\t\tratio\tspam_num\tham_num\n');
+for i=1:top_k
+    idx=top_k_idx(N-i+1);
+    ratio_temp=top_k_ratio(N-i+1);
+    fprintf('%d\t%.2f\t%d\t\t\t%d\n',idx,ratio_temp,x(2,idx),x(1,idx));
+end
+
+%b
+%accuracy on testing set
+x(1,:)=x(1,:)/sum(x(1,:),2);
+x(2,:)=x(2,:)/sum(x(2,:),2);
