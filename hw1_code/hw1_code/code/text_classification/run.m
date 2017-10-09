@@ -27,7 +27,10 @@ spam_test(:, 1:size(spam_test_tight, 2)) = spam_test_tight;
 %a
 %find the words with the highest ratio
 top_k=10;
-
+% x(1,:)=x(1,:)/num_ham_train;
+% x(2,:)=x(2,:)/num_spam_train;
+x(1,:)=x(1,:)/sum(x(1,:),2);
+x(2,:)=x(2,:)/sum(x(2,:),2);
 ratio=x(2,:)./x(1,:);
 [top_k_ratio,top_k_idx]= sort(ratio,2);
 fprintf('top k words:\n');
@@ -40,5 +43,33 @@ end
 
 %b
 %accuracy on testing set
-x(1,:)=x(1,:)/sum(x(1,:),2);
-x(2,:)=x(2,:)/sum(x(2,:),2);
+num_ham_test=size(ham_test,1);
+num_spam_test=size(spam_test,1);
+log_x=log(x);
+p_ham=ham_test*log_x';
+p_ham(:,1)=p_ham(:,1)+log(num_ham_train/(num_ham_train+num_spam_train));
+p_ham(:,2)=p_ham(:,2)+log(num_spam_train/(num_spam_train+num_ham_train));
+p_error=p_ham(:,1)<p_ham(:,2);
+error=sum(p_error);
+%for q-d
+FP=sum(p_error);
+TN=num_ham_test-FP;
+
+p_spam=spam_test*log_x';
+p_spam(:,1)=p_spam(:,1)+log(num_ham_train/(num_ham_train+num_spam_train));
+p_spam(:,2)=p_spam(:,2)+log(num_spam_train/(num_spam_train+num_ham_train));
+p_error=p_spam(:,1)>p_spam(:,2);
+error=error+sum(p_error);
+%for q-d
+FN=sum(p_error);
+TP=num_spam_test-FN;
+
+fprintf('error num:%d\n',error);
+error=error/(num_spam_test+num_ham_test);
+fprintf('error ratio:%.4f\n',error);
+
+%c
+%precision and recall
+precision=TP/(TP+FP);
+recall=TP/(TP+FN);
+fprintf('precision:%.4f\nrecall:%.4f\n',precision,recall);
