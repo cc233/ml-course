@@ -3,16 +3,28 @@
 % See http://www.mathworks.cn/cn/help/matlab/matlab_prog/run-sections-of-programs.html for more details.
 
 %% Part1: Preceptron
-nRep = 1000; % number of replicates
-nTrain = 10; % number of training data
-
+nRep = 20; % number of replicates
+nTrain = 100; % number of training data
+E_train=0;
+E_test=0;
+train_error_sum=0;
+iter_sum=0;
 for i = 1:nRep
     [X, y, w_f] = mkdata(nTrain);
     [w_g, iter] = perceptron(X, y);
     % Compute training, testing error
+    [temp,N]=size(X);
+    X0=ones(1,N);
+    X_full=[X0;X];
+    iter=0;
+    y_hat=w_g'*X_full;
+    %1 for wrong, 0 for correct
+    wrong=(y.*y_hat)<=0;
+    train_error_sum=train_error_sum+wrong/nTrain;
     % Sum up number of iterations
+    iter_sum=iter+iter_sum;
 end
-
+avgIter=iter_sum/nTrain;
 %fprintf('E_train is %f, E_test is %f.\n', E_train, E_test);
 %fprintf('Average number of iterations is %d.\n', avgIter);
 plotdata(X, y, w_f, w_g, 'Pecertron');
