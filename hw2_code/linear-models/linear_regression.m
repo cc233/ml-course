@@ -8,5 +8,10 @@ function w = linear_regression(X, y)
 %
 
 % YOUR CODE HERE
-
+lr=0.1;
+[p,N]=size(X);
+w=zeros(p+1,1);
+X0=ones(1,N);
+X_full=[X0;X];
+w=inv(X_full*X_full')*X_full*y';
 end

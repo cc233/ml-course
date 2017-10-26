@@ -22,7 +22,7 @@ while true
   end
 end
 
-if nargin == 2
+if nargin == 3
     if noisy == 'noisy'
         idx = randsample(N,N/10);
         y(idx) = -y(idx);
